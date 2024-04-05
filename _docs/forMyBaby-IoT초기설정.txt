@@ -1,0 +1,97 @@
+[원격연결 및 기본 명령어]
+# 원격연결
+ssh cherry@192.168.100.245
+2410110
+
+# 기본 명령어
+sudo apt update
+sudo apt upgrade
+
+
+[1. Alternative으로 파이썬 버전 관리 및 등록]
+- ubuntu22.04.4의 경우 기본으로 python3.10 지원하므로 다른 버전 사용을 원한다면 여러개 등록 해서 사용하는게 좋다.
+
+# python3에 대한 가능한 버전 추가 설정
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
+update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 2
+
+# python3 버전 변경
+sudo update-alternatives --config python3
+
+
+
+[파이썬에서 색상과 영상 표현방법]
+# 색상 (왜? 빛은 삼원색으로 나눌 수 있어서 각 1byte씩 3bytes.)
+그레이스케일 → numpy.unit8 (1Byte 사용)
+컬러 → 튜플, numpy.ndarray (3byte 사용)
++ 같은 사진을 그레이스케일로 변환한 것과 컬러 사진과의 용량 차이는 3배 정도
+
+# 영상 
+너비(가로) X 높이(세로) 영상.
+영상은 왼쪽 상단에서 부터 0이 시작한다. 
+
+[2. openCV 설치]
+pip install opencv-python
+pip install opencv-contrib-python (추가 모듈도 함께 사용하고자 할 때)
+
+
+[3. numpy 설치] - OpenCV는 영상을 정수로 구성된 넘파이 배열로 보여주기 때문이다.
+pip install numpy
+
+
+[주요 openCV API - 8가지]
+1. 파일 불러오기
+2. 파일 저장하기
+3. 새 창 띄우기
+4. 창 닫기
+5. 창 위치 이동
+6. 창 크기 변경
+7. 영상 출력하기
+8. 키보드 입력 대기
+
+[4. matplotlib 설치]
+pip install matplotlib
+
+[컬로 혹은 흑백 영상 출력하기]
+cv2.imread() # BGR 영상 불러오기
+cv2.cvtColor() # BGR -> RGB 색상 배열 변경
+
+
+[maplayer로 스트리밍 영상 및 음악 다운받기]
+# 스트리밍 영상 및 음악 다운받기
+mplayer {URL} -dumpstream -dumpfile ~/Videos/file.avi # test용 URL : https://archive.org/download/BigBuckBunny/big_buck_bunny_480p_surround-fix.avi
+# 다운  받은 파일 실행 
+mplayer ~/Videos/file.avi
+
+
+
+
+[유닉스 명령어로 바로가기 링크 설정 ]
+
+
+ln -s ./Desktop/workspace to-workspace
+
+ln -s ./Desktop/workspace/C202 c202
+
+
+
+[video-stream.py 실행 시 영상 출력 링크]
+http://192.168.100.245:8000/
+
+
+
+[파이썬 프로젝트 의존성 관리]
+
+# 현재 환경에 설치된 모든 패키지와 그 버전을 출력
+pip freeze > requirements.txt
+
+# 패키지 설치
+pip install -r requirements.txt
+
+[오늘의 산출물]
+log.txt
+requirements.txt -> 파이썬 패키지 의존성 관리
+video-stream.py     -> 비디오 실시간 스트림 
+video-stream-sementation-background.py   -> 비디오 실시간 스트림 및 이미지 세그멘테이션
+
+
